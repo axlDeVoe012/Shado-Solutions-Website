@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode colors */
+  --tvh-red: #e63946;
+  --tvh-blue: #457b9d;
+  --tvh-yellow: #f1c40f;
+  --tvh-white: #f1faee;
+  --tvh-light-bg: #f8f9fa;
+  --tvh-light-card: #ffffff;
+  --tvh-light-text: #1a1a2e;
+  --tvh-light-muted: #6c757d;
+  --tvh-light-border: #dee2e6;
+
+  --background: 210 20% 98%;
+  --foreground: 224 71.4% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 224 71.4% 4.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 71.4% 4.1%;
+  --primary: 355 78% 56%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 220 14.3% 95.9%;
+  --secondary-foreground: 220.9 39.3% 11%;
+  --muted: 220 14.3% 95.9%;
+  --muted-foreground: 220 8.9% 46.1%;
+  --accent: 220 14.3% 95.9%;
+  --accent-foreground: 220.9 39.3% 11%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 20% 98%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 355 78% 56%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* Dark mode colors */
+  --tvh-red: #e63946;
+  --tvh-blue: #457b9d;
+  --tvh-yellow: #f1c40f;
+  --tvh-white: #f1faee;
+  --tvh-dark-bg: #121212;
+  --tvh-dark-card: #1e1e1e;
+  --tvh-dark-text: #f1faee;
+  --tvh-dark-muted: #a0aec0;
+  --tvh-dark-border: #2d3748;
+
+  --background: 224 71.4% 4.1%;
+  --foreground: 210 20% 98%;
+  --card: 224 71.4% 4.1%;
+  --card-foreground: 210 20% 98%;
+  --popover: 224 71.4% 4.1%;
+  --popover-foreground: 210 20% 98%;
+  --primary: 355 78% 56%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 215 27.9% 16.9%;
+  --secondary-foreground: 210 20% 98%;
+  --muted: 215 27.9% 16.9%;
+  --muted-foreground: 217.9 10.6% 64.9%;
+  --accent: 215 27.9% 16.9%;
+  --accent-foreground: 210 20% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 20% 98%;
+  --border: 215 27.9% 16.9%;
+  --input: 215 27.9% 16.9%;
+  --ring: 355 78% 56%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-tvh-red via-tvh-yellow to-tvh-blue;
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(to right, var(--tvh-red), var(--tvh-yellow), var(--tvh-blue));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.animated-gradient-bg {
+  background: linear-gradient(-45deg, var(--tvh-red), var(--tvh-blue), var(--tvh-yellow));
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.glow {
+  box-shadow: 0 0 15px rgba(230, 57, 70, 0.5);
+}
+
+.glow-blue {
+  box-shadow: 0 0 15px rgba(69, 123, 157, 0.5);
+}
+
+.glow-yellow {
+  box-shadow: 0 0 15px rgba(241, 196, 15, 0.5);
+}
+
+.text-shadow {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Light mode specific styles */
+.light .light-card {
+  @apply bg-white shadow-md border border-gray-100;
+}
+
+.light .light-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.light .light-gradient {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.95));
+}
+
+.light .light-border {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode specific styles */
+.dark .dark-card {
+  @apply bg-black/50 backdrop-blur-sm border border-white/10;
+}
+
+.dark .dark-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark .dark-gradient {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95));
+}
+
+.dark .dark-border {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Theme transition */
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
